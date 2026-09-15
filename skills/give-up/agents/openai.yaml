@@ -1,0 +1,5 @@
+interface:
+  display_name: "Give up"
+  short_description: "Reveal the answer and record a gave-up result"
+policy:
+  allow_implicit_invocation: false
