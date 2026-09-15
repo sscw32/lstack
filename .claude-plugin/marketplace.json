@@ -1,5 +1,7 @@
 {
   "name": "lstack",
+  "owner": { "name": "sscw32" },
+  "description": "lstack: a markdown study vault with spaced review, hints, and evidence-based status for any coding agent.",
   "plugins": [
     {
       "name": "lstack",
