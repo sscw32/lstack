@@ -1,0 +1,33 @@
+lstack: 0.1.0
+subject: linear-algebra
+title: Linear Algebra
+created: 2026-09-01
+
+schedule:
+  sessions_per_week: 4
+  minutes_per_session: 45
+
+scheduling:
+  ladder_days: [1, 3, 7, 16, 35]
+  pass_threshold: 0.67
+  delayed_min_days: 1
+  mastered_after_passes: 3
+
+node_sections:
+  - Summary
+  - Why it matters
+  - Terms
+  - Analogies
+  - Heuristics
+  - Aha
+  - Open questions
+  - Cards
+
+voice:
+  register: casual
+  verbosity: terse
+  humor: some
+  bluntness: direct
+
+overview: false
+node_available: true

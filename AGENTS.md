@@ -19,7 +19,7 @@ A pack of 23 markdown skills plus one zero-dependency Node script. `docs/LSTACK-
 ## How to test
 
 ```bash
-node --test skills/setup-vault/tests
+node --test 'skills/setup-vault/tests/*.test.mjs'
 node scripts/check-skills.mjs
 cd examples/linear-algebra && node ../../skills/setup-vault/scripts/lstack.mjs build --today 2026-09-15 && git diff --exit-code kb
 ```
@@ -35,4 +35,5 @@ The third command must leave `git diff` empty. The checked-in generated files ar
 
 ## Status
 
-- Phase 0 skeleton: in progress.
+- Phase 0 skeleton: layout, manifests, example vault done. Installer acceptance pending.
+- Phase 1 script: done. 16 tests green, build byte-identical, serve renders index, graph, node.
