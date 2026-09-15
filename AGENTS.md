@@ -9,6 +9,7 @@ A pack of 23 markdown skills plus one zero-dependency Node script. `docs/LSTACK-
 ## Layout
 
 - `skills/<name>/SKILL.md`. One folder per skill, flat. Every folder also has `agents/openai.yaml`.
+- `.agents/skills/<name>` and `.claude/skills/<name>`. Relative symlinks to `skills/<name>`, so Cursor, Codex, Copilot, OpenCode, Amp, Gemini CLI, and Claude Code find the pack on clone. Recreate with `node scripts/link-agent-skills.mjs`.
 - `skills/setup-vault/scripts/lstack.mjs`. The build script. `setup-vault` copies it into a vault as `.lstack/lstack.mjs`. No other skill references this path.
 - `skills/setup-vault/references/`. Templates copied into a vault's `.lstack/`.
 - `skills/setup-vault/tests/`. `node --test` suite over `examples/linear-algebra`.
@@ -28,7 +29,7 @@ The third command must leave `git diff` empty. The checked-in generated files ar
 
 ## Conventions
 
-- Skills: frontmatter keys are only `name`, `description`, and `disable-model-invocation`. Description starts with `In an lstack learning vault (a folder containing lstack.yaml), `. Under 200 lines. No `$ARGUMENTS`, no hooks, no sub-agents.
+- Skills: frontmatter keys are only `name`, `description`, and `disable-model-invocation`. Description starts with `In an lstack learning vault (a folder containing lstack.yaml), `. Name matches `^[a-z0-9]+(?:-[a-z0-9]+)*$` and is at most 64 characters. Description is 1-1024 characters. Under 200 lines. No `$ARGUMENTS`, no hooks, no sub-agents. After adding a skill folder, run `node scripts/link-agent-skills.mjs`.
 - Script: single ES module, Node 18+, no npm dependencies, under 600 lines.
 - Generated vault files start with the `<!-- GENERATED ... -->` line and are never hand-edited.
 - Commit messages use Conventional Commits, `type(scope): subject`.

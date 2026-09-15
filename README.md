@@ -30,6 +30,8 @@ claude plugins install lstack@sscw32/lstack
 
 Run the install inside the folder that will become your vault, or once globally with `-g`.
 
+Cloning this repo is enough to use the skills here. Cursor, Codex, Copilot, OpenCode, Amp, and Gemini CLI read `.agents/skills/`. Claude Code reads `.claude/skills/`. Both trees are committed as links to `skills/`. A new empty folder still needs the install command above.
+
 ## Five-minute walkthrough on the example vault
 
 The repo ships a complete vault in `examples/linear-algebra/` (seven nodes, two branches, a few sessions of history). Open it with your agent and try the skills without setting anything up.

@@ -28,7 +28,11 @@ for (const name of folders) {
   if (!fm) { fail(where, 'SKILL.md has no frontmatter'); continue; }
   for (const k of Object.keys(fm)) if (!ALLOWED_KEYS.has(k)) fail(where, `frontmatter key "${k}" is not allowed`);
   if (fm.name !== name) fail(where, `frontmatter name "${fm.name}" does not match folder`);
+  if (typeof fm.name !== 'string' || fm.name.length > 64 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(fm.name)) {
+    fail(where, `frontmatter name "${fm.name}" fails the agentskills.io name rules`);
+  }
   const desc = String(fm.description || '');
+  if (desc.length < 1 || desc.length > 1024) fail(where, `description is ${desc.length} chars; must be 1-1024`);
   if (!desc.startsWith(PREFIX)) fail(where, 'description must start with the vault prefix');
   if (!desc.includes('Use for')) fail(where, 'description lacks "Use for" trigger phrases');
   if (!desc.includes('Skip when')) fail(where, 'description lacks "Skip when" exclusions');
@@ -52,6 +56,19 @@ const script = path.join(root, 'skills', 'setup-vault', 'scripts', 'lstack.mjs')
 const scriptLines = fs.readFileSync(script, 'utf8').split('\n').length;
 if (scriptLines > 600) fail('skills/setup-vault/scripts/lstack.mjs', `${scriptLines} lines; must be at most 600`);
 if (/^import .* from ['"](?!node:)/m.test(fs.readFileSync(script, 'utf8'))) fail('skills/setup-vault/scripts/lstack.mjs', 'imports a non-node: module');
+
+for (const tree of ['.agents/skills', '.claude/skills']) {
+  for (const name of folders) {
+    const dest = path.join(root, tree, name);
+    const where = `${tree}/${name}`;
+    let st;
+    try { st = fs.lstatSync(dest); } catch { fail(where, 'missing discovery symlink; run node scripts/link-agent-skills.mjs'); continue; }
+    if (!st.isSymbolicLink()) { fail(where, 'exists but is not a symlink'); continue; }
+    const resolved = fs.realpathSync(dest);
+    if (resolved !== path.join(skillsDir, name)) fail(where, `resolves to ${resolved}, expected skills/${name}`);
+    if (!fs.existsSync(path.join(dest, 'SKILL.md'))) fail(where, 'SKILL.md missing through the symlink');
+  }
+}
 
 const plugin = JSON.parse(fs.readFileSync(path.join(root, '.claude-plugin', 'plugin.json'), 'utf8'));
 const exampleVersion = fs.readFileSync(path.join(root, 'examples', 'linear-algebra', '.lstack', 'VERSION'), 'utf8').trim();

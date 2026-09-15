@@ -19,6 +19,21 @@ Run on 2026-09-15 against a scratch copy of `examples/linear-algebra/` with the 
 - **Source honesty.** Claude Code's `/explain` said out loud that the only source was a table of contents and that the explanation was anchored on the node rather than the book's text. That is the behaviour the skill asks for.
 - **Codex output echo.** `codex exec` echoes the files it reads (including `.lstack/card-writing.md`) into stdout before the reply. Cosmetic.
 
+## Discovery after a clone
+
+The source of each skill is `skills/<name>/`. That path is what `npx skills add` and the Claude Code plugin loader scan. It is not what a cloned working copy exposes to the other agents.
+
+Committed relative symlinks fill the gap:
+
+| Tree | Who reads it |
+|---|---|
+| `.agents/skills/<name>` → `../../skills/<name>` | Cursor, Codex, Copilot, OpenCode, Amp, Gemini CLI |
+| `.claude/skills/<name>` → `../../skills/<name>` | Claude Code (does not read `.agents/skills/`) |
+
+`.agents/` and `.claude/` stay in `.gitignore` so a local `npx skills add` of some other pack does not ship. The 23 lstack links are force-added. Recreate them with `node scripts/link-agent-skills.mjs`. `scripts/check-skills.mjs` fails if a link is missing or points at the wrong folder.
+
+Repo-root always-on files: `AGENTS.md` (Cursor, Codex, Copilot, OpenCode, Amp), `CLAUDE.md` (`@AGENTS.md`), `GEMINI.md` (`@AGENTS.md`).
+
 ## Not covered here
 
 - Gemini CLI, Copilot, OpenCode, Amp: not installed on this machine. Their skill directories match the `.agents/skills/` layout the installer writes (spec section 3), so discovery should work, but that is inferred, not observed.
