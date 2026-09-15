@@ -1,0 +1,5 @@
+interface:
+  display_name: "Visualize"
+  short_description: "Serve the vault's index, graph, and nodes in a browser"
+policy:
+  allow_implicit_invocation: false

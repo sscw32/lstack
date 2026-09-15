@@ -1,0 +1,3 @@
+interface:
+  display_name: "Progress"
+  short_description: "Report status counts, gaps, streaks, and changes"

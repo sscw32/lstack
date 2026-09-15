@@ -1,0 +1,3 @@
+interface:
+  display_name: "Add source"
+  short_description: "Propose nodes and edits from a new source file"

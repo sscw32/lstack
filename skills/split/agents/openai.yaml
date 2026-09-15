@@ -1,0 +1,3 @@
+interface:
+  display_name: "Split node"
+  short_description: "Split a node into child nodes beside it"

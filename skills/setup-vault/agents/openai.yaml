@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup vault"
+  short_description: "Create an lstack learning vault in this folder"
+policy:
+  allow_implicit_invocation: false

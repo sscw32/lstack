@@ -1,0 +1,3 @@
+interface:
+  display_name: "Today"
+  short_description: "Show today's review queue and budget"
