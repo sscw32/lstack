@@ -1,0 +1,10 @@
+{
+  "name": "lstack",
+  "plugins": [
+    {
+      "name": "lstack",
+      "source": "./",
+      "description": "Turn any coding agent into a personal tutor over a folder of markdown. Spaced review, hints that never reveal, status that moves only on delayed tests."
+    }
+  ]
+}
