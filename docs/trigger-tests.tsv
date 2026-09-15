@@ -1,0 +1,24 @@
+skill	in_scope_prompt	out_of_scope_prompt
+setup-vault	I made an empty folder called stats-101. Set up a vault so I can learn statistics with lstack.	Set up a new Next.js project in this folder with TypeScript.
+voice	Be more formal with me and stop making jokes when we study.	Add text-to-speech voice output to my app.
+today	What should I study today? I've got 45 minutes.	What's on my calendar today?
+progress	How am I doing overall in this vault? Show me my stats.	Add a progress bar component to the upload page.
+add-source	I dropped chapter-4.md into sources. Propose nodes from it.	Add a new data source to the analytics dashboard.
+check-source	Is anything in sources/lecture-2.md wrong compared to the book?	Check the source code for memory leaks.
+split	The kernel node is too big, break it into subtopics.	Split this string on commas in JavaScript.
+lint-vault	Check the vault for contradictions and broken prereqs.	Run eslint on the src folder and fix the errors.
+explain	Explain the kernel node to me in intuition mode.	Explain what this stack trace means.
+why-care	Why does rank-nullity matter? What does it unlock?	Why should our team care about switching to pnpm?
+bro	bro, say that again in plain English.	Write a bro-style greeting for the landing page.
+visualize	Show me the vault graph in a browser.	Visualize the sales data as a bar chart in the dashboard.
+drill	Drill me on what's due today.	Drill down into the database table by region.
+quiz	Quiz me on linear maps.	Build a quiz component in React with a score screen.
+recall	Let me brain-dump everything I remember about basis, then check me.	Recall the last commit message from git.
+teach-back	Pretend you don't know what a kernel is and let me teach you.	Give me a role-play scenario for practising a job interview.
+into-the-woods	Go deeper on kernel, test me on the fine print the summary skips.	Let's go into the woods this weekend, plan a hike.
+cards	Make flashcards for the span node.	Design a card layout for the product grid.
+hint	I'm stuck on sheet 1 question 3 about the kernel. Give me a nudge, not the answer.	Any hints on why my Docker build is failing?
+give-up	I give up on this problem, just show me the answer.	Should I give up on this feature and cut it from the release?
+log-session	I studied bases on paper yesterday for an hour, here's my worked problem set.	Show me the application log for the last session.
+wrap-up	I'm done for today, save the session.	Wrap up the sprint and close the tickets.
+roast	Roast my studying, how bad is it really?	Roast the code quality in this pull request.

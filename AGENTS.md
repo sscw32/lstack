@@ -35,5 +35,10 @@ The third command must leave `git diff` empty. The checked-in generated files ar
 
 ## Status
 
-- Phase 0 skeleton: layout, manifests, example vault done. Installer acceptance pending.
+- Phase 0 skeleton: done. `npx skills add` installs 23, `claude plugins validate` passes.
 - Phase 1 script: done. 16 tests green, build byte-identical, serve renders index, graph, node.
+- Phase 2 vault creation skills: written, check-skills green. Real-vault use pending (owner's private vault, later).
+- Phase 3 explaining and hints: written, check-skills green. Real-vault use pending.
+- Phase 4 testing skills: written, check-skills green. Real-vault use pending.
+- Phase 5 sessions and extras: written, check-skills green. Real-vault use pending.
+- Phase 6 docs: README with serve screenshots done. Cross-agent smoke in `docs/portability.md`.
