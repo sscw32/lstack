@@ -35,6 +35,8 @@ for (const name of folders) {
   if (text.includes('$ARGUMENTS')) fail(where, 'uses $ARGUMENTS');
   if (/sub-?agent|subagent/i.test(body) && !/no sub-agents/i.test(body)) fail(where, 'mentions sub-agents');
   if (name !== 'bro' && !body.includes('lstack.yaml')) fail(where, 'body lacks the lstack.yaml precondition');
+  if (name !== 'bro' && name !== 'setup-vault' && !(body.includes('MISSION.md') && body.includes('kb/today.md') && body.includes('log/'))) fail(where, 'body lacks the MISSION.md, kb/today.md, newest log read (spec 11.0 rule 4)');
+  if (!/node \.lstack\/lstack\.mjs|No writes|no writes|No build needed/.test(body)) fail(where, 'body neither runs .lstack/lstack.mjs nor declares no writes or no build');
   if (/skills\/[a-z-]+\/scripts\/lstack\.mjs/.test(body)) fail(where, 'references the script by skill path instead of .lstack/lstack.mjs');
   const userOnly = fm['disable-model-invocation'] === true;
   const yamlFile = path.join(dir, 'agents', 'openai.yaml');

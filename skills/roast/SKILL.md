@@ -10,7 +10,7 @@ Numbers first, jokes second. Their data, nothing invented. No writes.
 
 ## Preconditions
 
-Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`. Read `lstack.yaml`. If `voice.humor` is `none`, decline politely in one line and offer `/progress`. Stop.
+Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`. Read `lstack.yaml`. If `voice.humor` is `none`, decline politely in one line and offer `/progress`. Stop. Otherwise read `MISSION.md`, `kb/today.md`, and the newest file in `log/`.
 
 ## Argument
 

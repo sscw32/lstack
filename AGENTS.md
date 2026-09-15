@@ -19,7 +19,7 @@ A pack of 23 markdown skills plus one zero-dependency Node script. `docs/LSTACK-
 ## How to test
 
 ```bash
-node --test 'skills/setup-vault/tests/*.test.mjs'
+./scripts/verify.sh              # runs everything below
 node scripts/check-skills.mjs
 cd examples/linear-algebra && node ../../skills/setup-vault/scripts/lstack.mjs build --today 2026-09-15 && git diff --exit-code kb
 ```

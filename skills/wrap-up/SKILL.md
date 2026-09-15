@@ -10,7 +10,7 @@ One preview. One yes. One new log file. Then build and lint.
 
 ## Preconditions
 
-Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`. Read the newest file in `log/` to get today's next session number.
+Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`. Read `MISSION.md`, `kb/today.md`, and the newest file in `log/`. The newest log gives today's next session number.
 
 ## Argument
 

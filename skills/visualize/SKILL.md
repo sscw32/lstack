@@ -10,7 +10,7 @@ Start `serve` and hand over the URL. Write nothing.
 
 ## Preconditions
 
-Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`.
+Confirm `lstack.yaml` exists in the working directory or a parent. If not, say this isn't a vault and suggest `/setup-vault`. Read `MISSION.md`, `kb/today.md`, and the newest file in `log/`. Open with one line on where the user is.
 
 ## Argument
 
