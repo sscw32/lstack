@@ -1,0 +1,3 @@
+interface:
+  display_name: "Check source"
+  short_description: "Report suspected errors in a source, note, or node"

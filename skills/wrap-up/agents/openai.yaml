@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wrap up"
+  short_description: "Close the session with one batch write"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Log session"
+  short_description: "Record study done away from the agent"

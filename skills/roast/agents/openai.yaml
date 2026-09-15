@@ -1,0 +1,5 @@
+interface:
+  display_name: "Roast"
+  short_description: "A short PG roast from the user's own study data"
+policy:
+  allow_implicit_invocation: false
