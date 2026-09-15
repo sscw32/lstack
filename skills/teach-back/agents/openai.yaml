@@ -1,0 +1,3 @@
+interface:
+  display_name: "Teach back"
+  short_description: "Teach a node to a naive student persona"

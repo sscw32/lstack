@@ -1,0 +1,3 @@
+interface:
+  display_name: "Drill"
+  short_description: "Run today's spaced review"

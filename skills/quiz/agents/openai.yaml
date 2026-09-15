@@ -1,0 +1,3 @@
+interface:
+  display_name: "Quiz"
+  short_description: "Test one node or branch, topic known"
