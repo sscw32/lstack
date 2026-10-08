@@ -427,7 +427,7 @@ const LINT_RULES = [
     const file = path.join(v.root, '.lstack', 'VERSION');
     if (!fs.existsSync(file)) return [['.lstack/VERSION', 'missing']];
     const installed = fs.readFileSync(file, 'utf8').trim();
-    return v.config.lstack && semverLess(installed, v.config.lstack) ? [['.lstack/VERSION', `${installed} is older than lstack.yaml ${v.config.lstack}; rerun /setup-vault to refresh .lstack/`]] : [];
+    return v.config.lstack && semverLess(installed, v.config.lstack) ? [['.lstack/VERSION', `${installed} is older than lstack.yaml ${v.config.lstack}; run /upgrade-vault to refresh .lstack/`]] : [];
   } },
   { level: 'INFO', check: (v) => v.nodes.filter((n) => Array.isArray(n.fm.sources) && n.fm.sources.some((s) => String(s) === 'agent-proposed')).map((n) => [kbPath(n), 'sources include agent-proposed (unverified)']) },
 ];

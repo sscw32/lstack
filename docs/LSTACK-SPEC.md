@@ -70,11 +70,12 @@ lstack/
 │   │   ├── references/
 │   │   │   ├── node-schema.md       # Section 6, verbatim, copied into vault/.lstack/
 │   │   │   ├── card-writing.md      # Section 6.6 rubric, copied into vault/.lstack/
+│   │   │   ├── VERSION              # pack version, copied into vault/.lstack/; must equal plugin.json
 │   │   │   ├── agents-md-template.md
 │   │   │   └── lstack-yaml-template.md
 │   │   └── tests/                   # node --test; runs the script against ../../examples/linear-algebra
 │   ├── drill/SKILL.md
-│   ├── ... one folder per skill (23 total, Section 11)
+│   ├── ... one folder per skill (24 total, Section 11)
 │   └── bro/SKILL.md
 └── docs/
     └── design-contract.md           # the decision record (optional, for humans)
@@ -82,7 +83,7 @@ lstack/
 
 **Why flat `skills/<name>/`.** Both the `npx skills` installer and the Claude Code plugin loader find skills at exactly this depth without a manifest listing.
 
-**Why the script lives inside `setup-vault`.** The installer allows subset installs (`-s drill`). Any skill that needs the script uses the *vault's* copy at `.lstack/lstack.mjs`, never a path into another skill's folder. `setup-vault` is the only skill that needs the script in its own folder, because it is the one that installs it.
+**Why the script lives inside `setup-vault`.** The installer allows subset installs (`-s drill`). Any skill that needs the script uses the *vault's* copy at `.lstack/lstack.mjs`, never a path into another skill's folder. `setup-vault` is the only skill that needs the script in its own folder, because it is the one that installs it. `/upgrade-vault` is the one exception to the no-cross-path rule: it reads `setup-vault/` as a sibling folder, because the upgrade source is the installed pack itself (Section 11.24).
 
 **Why `.agents/` and `.claude/` are gitignored.** The owner's working copy contains third-party dev skills there. The installer scans `.agents/skills/` and `.claude/skills/` in a repo, so shipping them would expose those skills as part of lstack.
 
@@ -240,8 +241,8 @@ Every planning skill (`/setup-vault`, `/today`, `/add-source`, `/progress`) read
 | `log/` | append only | New file per session. Never rewrite an existing log. |
 | `problems/*.md` | after a yes | Sheets, no solutions inside. |
 | `problems/attempts/` | never | The user's work. Structural "no answers" guarantee. |
-| `.lstack/` | `/setup-vault` only | Version-checked by lint. |
-| `AGENTS.md`, `lstack.yaml`, `MISSION.md` | `/setup-vault`, `/voice` | After a yes. |
+| `.lstack/` | `/setup-vault`, `/upgrade-vault` | Version-checked by lint. |
+| `AGENTS.md`, `lstack.yaml`, `MISSION.md` | `/setup-vault`, `/voice`; `/upgrade-vault` for `AGENTS.md` template changes and new `lstack.yaml` keys | After a yes. |
 
 ### 5.2 Ownership diagram
 
@@ -636,7 +637,7 @@ Single ES module, Node 18+, zero dependencies, ≤ 600 lines, `node .lstack/lsta
 | WARN | file in `sources/` cited by no node |
 | WARN | node cited by no other node's prereqs and with no children and not top-level (orphan) |
 | WARN | card syntax that is none of the four forms |
-| WARN | `.lstack/VERSION` older than the version in `lstack.yaml` or the installed skill |
+| WARN | `.lstack/VERSION` older than the version in `lstack.yaml` or the installed skill (message points to `/upgrade-vault`) |
 | INFO | node with `agent-proposed` in sources (unverified tree) |
 
 ### 10.4 `serve`
@@ -666,7 +667,7 @@ Skills marked **user-only** carry `disable-model-invocation: true` and `allow_im
 
 ### 11.1 `/setup-vault` (user-only)
 
-Creates a vault in the current folder. Refuse if `lstack.yaml` already exists (point to `/add-source`).
+Creates a vault in the current folder. Refuse if `lstack.yaml` already exists (point to `/add-source`, or `/upgrade-vault` for a newer pack).
 
 Steps, in order, each a short exchange:
 
@@ -785,6 +786,19 @@ Gather everything pending from this session: node edits not yet written, aha mom
 
 Read index and `due --json`. Deliver a short, funny, PG roast using only the user's own data: calibration gaps ("rated Kernel a 4, scored 1 of 3, bold"), overdue counts, hint counts, streaks. No writes. Respect `humor: none` by refusing politely.
 
+### 11.24 `/upgrade-vault` (user-only)
+
+Brings an existing vault up to the installed pack version. Source of the new files: the sibling `setup-vault/` folder of the installed pack (`scripts/lstack.mjs`, `references/node-schema.md`, `references/card-writing.md`, `references/VERSION`, and the two templates). If that folder is missing, stop and give the install line; never fetch from the network.
+
+1. Show the vault's `.lstack/VERSION`, `lstack.yaml` `lstack:`, and the pack's `references/VERSION`. Stop if the vault is newer than the pack.
+2. Show `diff -u` for each `.lstack/` file. These are pack-owned and replaced whole; if the user hand-edited one, say so and offer a backup to `notes/lstack-<file>.bak`.
+3. Dry run: lint the vault with the pack's script before installing it, and report findings that are new under the new version. Do not fix nodes here.
+4. `AGENTS.md`: merge template changes, keep user choices (title, Voice, weakened "Testing me" lines, listed but never restored silently), ask about unclear lines. Show as a unified diff. Confirm the `CLAUDE.md` and `GEMINI.md` shims.
+5. `lstack.yaml`: propose only keys the template has and the vault lacks, with defaults. Never change existing values; `lstack:` keeps the creating version.
+6. One numbered batch preview, yes or per-item edits. Write, `build`, `lint`, report old → new version.
+
+Never writes `sources/`, `kb/` nodes, `log/`, or `problems/`.
+
 ---
 
 ## 12. Build order and acceptance tests
@@ -795,7 +809,7 @@ Do the phases in order. Each phase ends with its tests passing and a one-line st
 
 - Repo layout (Section 2), manifests, `.gitignore`, `LICENSE`, README stub.
 - `examples/linear-algebra/`: a full vault per Section 4 with six nodes: `vector-spaces` (children `span`, `basis`), `linear-maps` (children `kernel`, `image`, `rank-nullity`). Prereqs: basis ← span; rank-nullity ← kernel, image, basis. Mixed statuses and dates around 2026-09 so `today.md` has content. Include expected generated files.
-- Accept: `npx skills add ./` from a scratch folder installs 23 skill folders; `claude plugins validate` (or equivalent) passes.
+- Accept: `npx skills add ./` from a scratch folder installs 24 skill folders; `claude plugins validate` (or equivalent) passes.
 
 ### Phase 1: script
 

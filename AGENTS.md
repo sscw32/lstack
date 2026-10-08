@@ -4,14 +4,14 @@ This file is for agents editing lstack itself. A vault's own `AGENTS.md` is a di
 
 ## What this repo is
 
-A pack of 23 markdown skills plus one zero-dependency Node script. `docs/LSTACK-SPEC.md` is the contract. Every on-disk format, rule, and skill body comes from it. Do not change a stated decision without flagging it in the commit message.
+A pack of 24 markdown skills plus one zero-dependency Node script. `docs/LSTACK-SPEC.md` is the contract. Every on-disk format, rule, and skill body comes from it. Do not change a stated decision without flagging it in the commit message.
 
 ## Layout
 
 - `skills/<name>/SKILL.md`. One folder per skill, flat. Every folder also has `agents/openai.yaml`.
 - `.agents/skills/<name>` and `.claude/skills/<name>`. Relative symlinks to `skills/<name>`, so Cursor, Codex, Copilot, OpenCode, Amp, Gemini CLI, and Claude Code find the pack on clone. Recreate with `node scripts/link-agent-skills.mjs`.
-- `skills/setup-vault/scripts/lstack.mjs`. The build script. `setup-vault` copies it into a vault as `.lstack/lstack.mjs`. No other skill references this path.
-- `skills/setup-vault/references/`. Templates copied into a vault's `.lstack/`.
+- `skills/setup-vault/scripts/lstack.mjs`. The build script. `setup-vault` copies it into a vault as `.lstack/lstack.mjs`. Only `upgrade-vault` also reads it, as a sibling folder of the installed pack, to refresh an existing vault.
+- `skills/setup-vault/references/`. Templates copied into a vault's `.lstack/`. `VERSION` is the pack version and must equal `.claude-plugin/plugin.json`; bump both together.
 - `skills/setup-vault/tests/`. `node --test` suite over `examples/linear-algebra`.
 - `examples/linear-algebra/`. A complete six-node vault. Fixture for tests and README.
 - `scripts/check-skills.mjs`. Repo lint over every skill folder (frontmatter keys, description prefix, line cap, openai.yaml).

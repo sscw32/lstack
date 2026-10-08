@@ -146,7 +146,7 @@ test('version prints .lstack/VERSION', () => {
 test('the example vault carries the same .lstack files that setup-vault installs', () => {
   const refs = path.join(here, '..', 'references');
   assert.equal(fs.readFileSync(path.join(FIXTURE, '.lstack', 'lstack.mjs'), 'utf8'), fs.readFileSync(SCRIPT, 'utf8'));
-  for (const f of ['node-schema.md', 'card-writing.md']) {
+  for (const f of ['node-schema.md', 'card-writing.md', 'VERSION']) {
     assert.equal(fs.readFileSync(path.join(FIXTURE, '.lstack', f), 'utf8'), fs.readFileSync(path.join(refs, f), 'utf8'), f);
   }
 });

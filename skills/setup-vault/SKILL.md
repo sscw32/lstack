@@ -1,12 +1,12 @@
 ---
 name: setup-vault
-description: In an lstack learning vault (a folder containing lstack.yaml), or in an empty folder that should become one, create the vault for one subject from the user's sources. Use for "/setup-vault", "set up a vault", "start learning X with lstack", "turn this folder into a study vault". Skip when lstack.yaml already exists (use /add-source), when the user wants to study rather than set up, or when the request is about a code project's setup.
+description: In an lstack learning vault (a folder containing lstack.yaml), or in an empty folder that should become one, create the vault for one subject from the user's sources. Use for "/setup-vault", "set up a vault", "start learning X with lstack", "turn this folder into a study vault". Skip when lstack.yaml already exists (use /add-source for new material, /upgrade-vault for a newer lstack), when the user wants to study rather than set up, or when the request is about a code project's setup.
 disable-model-invocation: true
 ---
 
 # Setup vault
 
-Create an lstack vault in the current folder through a short series of exchanges, then write everything in one confirmed batch. Refuse if `lstack.yaml` already exists here and point to `/add-source`.
+Create an lstack vault in the current folder through a short series of exchanges, then write everything in one confirmed batch. Refuse if `lstack.yaml` already exists here and point to `/add-source`, or to `/upgrade-vault` if the user wants a newer lstack in an old vault.
 
 The text after the skill name in the user's message is the subject name. If there is none, ask in step 2.
 
@@ -40,11 +40,11 @@ Templates live in this skill's `references/` folder. Read them before drafting.
 
 - `AGENTS.md` from `references/agents-md-template.md`. Fill the subject title and one Voice paragraph from the recorded voice.
 - `CLAUDE.md` and `GEMINI.md`, each exactly one line: `@AGENTS.md`.
-- `lstack.yaml` from `references/lstack-yaml-template.md`. `lstack: 0.1.0`, `created:` today, the schedule, the voice, `overview`, `node_available`.
+- `lstack.yaml` from `references/lstack-yaml-template.md`. `lstack:` the contents of `references/VERSION`, `created:` today, the schedule, the voice, `overview`, `node_available`.
 - `MISSION.md` from step 4.
 - `sources/` (already exists), `notes/`, `log/`, `problems/attempts/`. Create `notes/overview.md` only if asked in step 9.
 - One node file per row of the step 6 table, at `kb/<id>.md` for top level and `kb/<parent>/<id>.md` for children. Frontmatter per `references/node-schema.md` with `status: new`, `confidence: null`, all date fields `null`, `passes_in_a_row: 0`, `hint_count: 0`, `sessions: []`. Body: `# Title`, then `## Summary` holding two or three sentences drafted from the sources and ending with `(agent draft)`, then the remaining section headings from step 8, empty. No cards yet.
-- `.lstack/lstack.mjs`, `.lstack/node-schema.md`, `.lstack/card-writing.md`: copy `scripts/lstack.mjs`, `references/node-schema.md`, and `references/card-writing.md` from this skill's folder (the directory that contains this SKILL.md). `.lstack/VERSION` holds `0.1.0`.
+- `.lstack/lstack.mjs`, `.lstack/node-schema.md`, `.lstack/card-writing.md`: copy `scripts/lstack.mjs`, `references/node-schema.md`, and `references/card-writing.md` from this skill's folder (the directory that contains this SKILL.md). Copy `references/VERSION` to `.lstack/VERSION`.
 
 ## Rules
 

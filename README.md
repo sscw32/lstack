@@ -2,7 +2,7 @@
 
 Turn the coding agent you already use into a personal tutor over a folder of plain markdown.
 
-You make an empty folder, install lstack, run `/setup-vault`, drop your sources in, and study with Claude Code, Cursor, Codex, Gemini CLI, Copilot, OpenCode, or Amp. The folder becomes a **vault**: one subject, every bit of state in markdown you can read and edit, a 550-line zero-dependency Node script that keeps the generated views in sync, and 23 skills that teach, test, and record. Nothing is written to the vault without being shown to you first.
+You make an empty folder, install lstack, run `/setup-vault`, drop your sources in, and study with Claude Code, Cursor, Codex, Gemini CLI, Copilot, OpenCode, or Amp. The folder becomes a **vault**: one subject, every bit of state in markdown you can read and edit, a 550-line zero-dependency Node script that keeps the generated views in sync, and 24 skills that teach, test, and record. Nothing is written to the vault without being shown to you first.
 
 ![index page from lstack serve](docs/img/index.png)
 
@@ -90,6 +90,7 @@ Generated views (`index.md`, `graph.md`, `glossary.md`, `analogies.md`, `heurist
 | Skill | What it does |
 |---|---|
 | `/setup-vault` | Create a vault here from your sources |
+| `/upgrade-vault` | Bring an old vault up to the installed lstack version |
 | `/today` | Show the queue and budget, hand off |
 | `/drill` | Today's interleaved, topic-blind review |
 | `/quiz <node>` | Scoped test, topic known |
@@ -126,6 +127,16 @@ node .lstack/lstack.mjs version
 ```
 
 Add `--today YYYY-MM-DD` to any command to pin the date.
+
+## Upgrading
+
+An lstack update has two layers. The skills live wherever you installed them, so reinstall to update them:
+
+```bash
+npx skills add sscw32/lstack      # or: claude plugins update lstack
+```
+
+Each vault also keeps its own copy of the script and references in `.lstack/`. A reinstall does not change those. Open each vault and run `/upgrade-vault`. It shows the diff of every `.lstack/` file, lints your nodes with the new script before installing it, merges template changes into `AGENTS.md` while keeping your voice and testing-rule edits, and writes nothing until you say yes. Your nodes, sources, notes, and logs are never touched. When a vault falls behind, `lint` warns that `.lstack/VERSION` is older and points to `/upgrade-vault`.
 
 ## Developing lstack
 
