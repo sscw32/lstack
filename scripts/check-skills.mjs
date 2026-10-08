@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { parseYaml, splitFrontmatter } from '../skills/setup-vault/scripts/lstack.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const EXPECTED_SKILLS = 23;
+const EXPECTED_SKILLS = 24;
 const PREFIX = 'In an lstack learning vault (a folder containing lstack.yaml), ';
 const ALLOWED_KEYS = new Set(['name', 'description', 'disable-model-invocation']);
 const problems = [];
@@ -73,7 +73,8 @@ for (const tree of ['.agents/skills', '.claude/skills']) {
 const plugin = JSON.parse(fs.readFileSync(path.join(root, '.claude-plugin', 'plugin.json'), 'utf8'));
 const exampleVersion = fs.readFileSync(path.join(root, 'examples', 'linear-algebra', '.lstack', 'VERSION'), 'utf8').trim();
 const exampleYaml = parseYaml(fs.readFileSync(path.join(root, 'examples', 'linear-algebra', 'lstack.yaml'), 'utf8'));
-if (plugin.version !== exampleVersion || plugin.version !== String(exampleYaml.lstack)) fail('version', `plugin.json ${plugin.version}, example VERSION ${exampleVersion}, example lstack.yaml ${exampleYaml.lstack} disagree`);
+const packVersion = fs.readFileSync(path.join(root, 'skills', 'setup-vault', 'references', 'VERSION'), 'utf8').trim();
+if (plugin.version !== exampleVersion || plugin.version !== String(exampleYaml.lstack) || plugin.version !== packVersion) fail('version', `plugin.json ${plugin.version}, setup-vault references/VERSION ${packVersion}, example VERSION ${exampleVersion}, example lstack.yaml ${exampleYaml.lstack} disagree`);
 
 for (const p of problems) process.stdout.write(`${p}\n`);
 process.stdout.write(`${folders.length} skills checked, ${problems.length} problem${problems.length === 1 ? '' : 's'}\n`);

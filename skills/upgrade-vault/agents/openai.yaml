@@ -1,0 +1,5 @@
+interface:
+  display_name: "Upgrade vault"
+  short_description: "Refresh this vault's .lstack/ and AGENTS.md from the installed pack"
+policy:
+  allow_implicit_invocation: false
