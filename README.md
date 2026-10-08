@@ -112,7 +112,7 @@ Generated views (`index.md`, `graph.md`, `glossary.md`, `analogies.md`, `heurist
 | `/roast` | A PG roast from your own numbers |
 | `/voice` | Change register, verbosity, humor, bluntness, testing rules |
 | `/visualize` | Local read-only server |
-| `/bro` | Say that again, simpler |
+| `/bro` | Say that again, simpler. Copied from [pstack's `/bro`](https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md) |
 
 Cards use the Obsidian Spaced Repetition plugin's syntax, so a vault opened in Obsidian reviews the same cards.
 

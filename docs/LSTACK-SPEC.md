@@ -721,7 +721,7 @@ Argument: node id. Write a `## Why it matters` section: what this unlocks, what 
 
 ### 11.11 `/bro` (user-only)
 
-Body, verbatim: "Restate your last message. Stop using jargon and speak coherently. State it more simply and concisely, like one human talking to another." No reads, no writes.
+Copied from [pstack's `/bro` skill](https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md). Body, verbatim: "Restate your last message. Stop using jargon and speak coherently. State it more simply and concisely, like one human talking to another." No reads, no writes.
 
 ### 11.12 `/visualize` (user-only)
 
@@ -869,7 +869,7 @@ The owner keeps a private vault on their real subject (**ask the owner which sub
 - Agent Skills spec and per-agent skill directories. https://agentskills.io/specification and vendor docs → Section 3.
 - Vercel skills installer behavior. https://github.com/vercel-labs/skills → Section 2.1.
 - Matt Pocock's `teach` skill (MISSION.md, "never trust parametric knowledge"). https://github.com/mattpocock/skills → `MISSION.md`, sources-first setup.
-- pstack's `bro` skill (seven-line user-only corrective). → `/bro`.
+- pstack's `/bro` skill, copied as `/bro`. https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md
 
 ---
 
